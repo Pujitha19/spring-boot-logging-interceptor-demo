@@ -1,5 +1,5 @@
 
-package com.demo.springbootlogingintercepter.Soap;
+package com.demo.springbootlogingintercepter.model.Soap.External;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -32,8 +32,8 @@ import javax.xml.bind.annotation.XmlType;
     "intA",
     "intB"
 })
-@XmlRootElement(name = "Multiply")
-public class Multiply {
+@XmlRootElement(name = "Add")
+public class Add {
 
     protected int intA;
     protected int intB;

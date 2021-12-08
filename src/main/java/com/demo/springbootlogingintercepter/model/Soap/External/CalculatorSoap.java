@@ -1,5 +1,5 @@
 
-package com.demo.springbootlogingintercepter.Soap;
+package com.demo.springbootlogingintercepter.model.Soap.External;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -36,13 +36,13 @@ public interface CalculatorSoap {
     @RequestWrapper(localName = "Add", targetNamespace = "http://tempuri.org/", className = "com.example.Soap.Add")
     @ResponseWrapper(localName = "AddResponse", targetNamespace = "http://tempuri.org/", className = "com.example.Soap.AddResponse")
     public int add(
-            @WebParam(name = "intA", targetNamespace = "http://tempuri.org/")
-                    int intA,
-            @WebParam(name = "intB", targetNamespace = "http://tempuri.org/")
-                    int intB);
+        @WebParam(name = "intA", targetNamespace = "http://tempuri.org/")
+        int intA,
+        @WebParam(name = "intB", targetNamespace = "http://tempuri.org/")
+        int intB);
 
     /**
-     *
+     * 
      * @param intB
      * @param intA
      * @return
@@ -53,13 +53,13 @@ public interface CalculatorSoap {
     @RequestWrapper(localName = "Subtract", targetNamespace = "http://tempuri.org/", className = "com.example.Soap.Subtract")
     @ResponseWrapper(localName = "SubtractResponse", targetNamespace = "http://tempuri.org/", className = "com.example.Soap.SubtractResponse")
     public int subtract(
-            @WebParam(name = "intA", targetNamespace = "http://tempuri.org/")
-                    int intA,
-            @WebParam(name = "intB", targetNamespace = "http://tempuri.org/")
-                    int intB);
+        @WebParam(name = "intA", targetNamespace = "http://tempuri.org/")
+        int intA,
+        @WebParam(name = "intB", targetNamespace = "http://tempuri.org/")
+        int intB);
 
     /**
-     *
+     * 
      * @param intB
      * @param intA
      * @return
@@ -70,13 +70,13 @@ public interface CalculatorSoap {
     @RequestWrapper(localName = "Multiply", targetNamespace = "http://tempuri.org/", className = "com.example.Soap.Multiply")
     @ResponseWrapper(localName = "MultiplyResponse", targetNamespace = "http://tempuri.org/", className = "com.example.Soap.MultiplyResponse")
     public int multiply(
-            @WebParam(name = "intA", targetNamespace = "http://tempuri.org/")
-                    int intA,
-            @WebParam(name = "intB", targetNamespace = "http://tempuri.org/")
-                    int intB);
+        @WebParam(name = "intA", targetNamespace = "http://tempuri.org/")
+        int intA,
+        @WebParam(name = "intB", targetNamespace = "http://tempuri.org/")
+        int intB);
 
     /**
-     *
+     * 
      * @param intB
      * @param intA
      * @return
@@ -87,9 +87,9 @@ public interface CalculatorSoap {
     @RequestWrapper(localName = "Divide", targetNamespace = "http://tempuri.org/", className = "com.example.Soap.Divide")
     @ResponseWrapper(localName = "DivideResponse", targetNamespace = "http://tempuri.org/", className = "com.example.Soap.DivideResponse")
     public int divide(
-            @WebParam(name = "intA", targetNamespace = "http://tempuri.org/")
-                    int intA,
-            @WebParam(name = "intB", targetNamespace = "http://tempuri.org/")
-                    int intB);
+        @WebParam(name = "intA", targetNamespace = "http://tempuri.org/")
+        int intA,
+        @WebParam(name = "intB", targetNamespace = "http://tempuri.org/")
+        int intB);
 
 }
