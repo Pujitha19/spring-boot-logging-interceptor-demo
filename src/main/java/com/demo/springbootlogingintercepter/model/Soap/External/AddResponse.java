@@ -1,5 +1,5 @@
 
-package com.demo.springbootlogingintercepter.Soap;
+package com.demo.springbootlogingintercepter.model.Soap.External;
 
 import javax.xml.bind.annotation.*;
 

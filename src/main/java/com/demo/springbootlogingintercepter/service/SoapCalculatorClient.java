@@ -1,16 +1,16 @@
-package com.demo.springbootlogingintercepter;
+package com.demo.springbootlogingintercepter.service;
 
 
-import com.demo.springbootlogingintercepter.Soap.*;
+import com.demo.springbootlogingintercepter.model.Soap.External.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ws.client.core.support.WebServiceGatewaySupport;
 import org.springframework.ws.soap.client.core.SoapActionCallback;
 
 
-public class CalculatorClient  extends WebServiceGatewaySupport {
+public class SoapCalculatorClient extends WebServiceGatewaySupport {
 
-    private static Logger log = LoggerFactory.getLogger(CalculatorClient.class);
+    private static Logger log = LoggerFactory.getLogger(SoapCalculatorClient.class);
 
     public AddResponse getaddition(Add addrequest){
         Add add = new Add();
