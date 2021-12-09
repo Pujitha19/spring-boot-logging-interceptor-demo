@@ -1,5 +1,5 @@
 
-package com.demo.springbootlogingintercepter.model.Soap.External;
+package com.demo.springbootlogingintercepter.model.soap.external;
 
 import javax.xml.bind.annotation.*;
 
@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.*;
  *   &lt;complexContent&gt;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType"&gt;
  *       &lt;sequence&gt;
- *         &lt;element name="DivideResult" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
+ *         &lt;element name="AddResult" type="{http://www.w3.org/2001/XMLSchema}int"/&gt;
  *       &lt;/sequence&gt;
  *     &lt;/restriction&gt;
  *   &lt;/complexContent&gt;
@@ -25,28 +25,28 @@ import javax.xml.bind.annotation.*;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "divideResult"
+    "addResult"
 })
-@XmlRootElement(name = "DivideResponse")
-public class DivideResponse {
+@XmlRootElement(name = "AddResponse")
+public class AddResponse {
 
-    @XmlElement(name = "DivideResult")
-    protected int divideResult;
+    @XmlElement(name = "AddResult")
+    protected int addResult;
 
     /**
-     * Gets the value of the divideResult property.
+     * Gets the value of the addResult property.
      * 
      */
-    public int getDivideResult() {
-        return divideResult;
+    public int getAddResult() {
+        return addResult;
     }
 
     /**
-     * Sets the value of the divideResult property.
+     * Sets the value of the addResult property.
      * 
      */
-    public void setDivideResult(int value) {
-        this.divideResult = value;
+    public void setAddResult(int value) {
+        this.addResult = value;
     }
 
 }

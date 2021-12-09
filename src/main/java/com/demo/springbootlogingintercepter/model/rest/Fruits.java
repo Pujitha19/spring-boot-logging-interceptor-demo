@@ -1,4 +1,4 @@
-package com.demo.springbootlogingintercepter.model.Rest;
+package com.demo.springbootlogingintercepter.model.rest;
 
 public class Fruits {
     private String id;

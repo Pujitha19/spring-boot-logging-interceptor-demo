@@ -1,6 +1,6 @@
 package com.demo.springbootlogingintercepter.controller;
 
-import com.demo.springbootlogingintercepter.model.Soap.Internal.Fruits;
+import com.demo.springbootlogingintercepter.model.soap.internal.Fruits;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
