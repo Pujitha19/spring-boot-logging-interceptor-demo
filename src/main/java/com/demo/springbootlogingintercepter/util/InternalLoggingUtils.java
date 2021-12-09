@@ -1,4 +1,4 @@
-package com.demo.springbootlogingintercepter.configurations;
+package com.demo.springbootlogingintercepter.util;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
@@ -19,7 +19,7 @@ import java.util.Iterator;
 
 @Component
 @Slf4j
-public class InternalLoggingConfig implements Filter {
+public class InternalLoggingUtils implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -34,7 +34,7 @@ public class InternalLoggingConfig implements Filter {
         requestbuilder.append("\n======================================== Internal Flow Started =================================================================================")
                         .append("\nRequest URI "+ httpServletRequest.getRequestURI())
                                 .append("\nRequest Method "+ httpServletRequest.getMethod())
-                                        .append("\nRequest RequestBody {}"+ new String(httpServletRequest.getByteArray()));
+                                        .append("\nRequest RequestBody "+ new String(httpServletRequest.getByteArray()));
 
 
         Enumeration<String> headerNames = httpServletRequest.getHeaderNames();
@@ -55,8 +55,8 @@ public class InternalLoggingConfig implements Filter {
 
         StringBuilder requestbuilder1= new StringBuilder();
        requestbuilder1
-        .append("\nResponse Status {}"+ httpservletResponse.getStatus())
-                .append("\nResponse Body {}"+ new String(httpservletResponse.getBaos().toByteArray()));
+        .append("\nResponse Status "+ httpservletResponse.getStatus())
+                .append("\nResponse Body "+ new String(httpservletResponse.getBaos().toByteArray()));
         Collection<String> headers=httpservletResponse.getHeaderNames();
         Iterator<String> iterator= headers.iterator();
         requestbuilder1.append("\nResponse Headers:: {\n");
