@@ -44,13 +44,13 @@ public class RestExternalUtils implements ClientHttpRequestInterceptor {
     private void logResponse(ClientHttpResponse response) throws IOException
     {
 
-        StringBuilder request = new StringBuilder();
-        request
+        StringBuilder responseBuilder = new StringBuilder();
+        responseBuilder
                 .append("\n============================INBOUND REST RESPONSE==========================================")
                 .append("\nStatus code  : "+ response.getStatusCode())
                 .append("\nHeaders      : "+ response.getHeaders())
                 .append("\nResponse body: "+ StreamUtils.copyToString(response.getBody(), Charset.defaultCharset()))
                 .append("\n===========================================================================================");
-        log.info(request.toString());
+        log.info(responseBuilder.toString());
     }
 }
