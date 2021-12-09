@@ -1,5 +1,5 @@
 
-package com.demo.springbootlogingintercepter.model.Soap.External;
+package com.demo.springbootlogingintercepter.model.soap.external;
 
 import javax.xml.namespace.QName;
 import javax.xml.ws.*;

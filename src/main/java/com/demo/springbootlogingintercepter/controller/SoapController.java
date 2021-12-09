@@ -1,6 +1,6 @@
 package com.demo.springbootlogingintercepter.controller;
 
-import com.demo.springbootlogingintercepter.model.Soap.External.*;
+import com.demo.springbootlogingintercepter.model.soap.external.*;
 import com.demo.springbootlogingintercepter.service.SoapCalculatorClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

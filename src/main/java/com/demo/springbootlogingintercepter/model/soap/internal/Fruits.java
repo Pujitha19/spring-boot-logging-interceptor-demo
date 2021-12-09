@@ -1,4 +1,4 @@
-package com.demo.springbootlogingintercepter.model.Soap.Internal;
+package com.demo.springbootlogingintercepter.model.soap.internal;
 
 public class Fruits {
     private String id;
