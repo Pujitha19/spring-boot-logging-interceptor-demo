@@ -1,4 +1,4 @@
-package com.demo.springbootlogingintercepter.configurations;
+package com.demo.springbootlogingintercepter.util;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -21,12 +21,12 @@ import java.nio.charset.StandardCharsets;
 
 @Slf4j
 @ResponseStatus
-public class SoapExternalConfig implements ClientInterceptor {
+public class SoapExternalUtils implements ClientInterceptor {
 
 
         @Override
         public boolean handleResponse(MessageContext messageContext) throws WebServiceClientException {
-            StringBuilder requestbuilder = new StringBuilder();
+            StringBuilder responseBuilder = new StringBuilder();
                        try {
 
                 ByteArrayOutputStream buffer = new ByteArrayOutputStream();
@@ -37,12 +37,12 @@ public class SoapExternalConfig implements ClientInterceptor {
                 URL obj=new URL(url);
                 HttpURLConnection connection=(HttpURLConnection)obj.openConnection();
 
-                requestbuilder.append("\n============================================ Inbound Soap RESPONSE ==================================================================================")
+                responseBuilder.append("\n============================================ Inbound Soap RESPONSE ==================================================================================")
                         .append("\nResponse Status: "+ connection.getResponseCode())
                         .append("\nResponse Body: "+payload)
                         .append("\n===============================================================================================================================================");
 
-                log.info(requestbuilder.toString());
+                log.info(responseBuilder.toString());
 
             } catch (IOException |URISyntaxException e) {
                 throw new WebServiceClientException("Can not write the SOAP response into the out stream", e) {
@@ -59,7 +59,7 @@ public class SoapExternalConfig implements ClientInterceptor {
 
         @Override
         public boolean handleRequest(MessageContext messageContext) throws WebServiceClientException {
-            StringBuilder requestbuild  = new StringBuilder();
+            StringBuilder requestBuilder  = new StringBuilder();
 
             try {
                 ByteArrayOutputStream buffer = new ByteArrayOutputStream();
@@ -68,11 +68,11 @@ public class SoapExternalConfig implements ClientInterceptor {
 
                 TransportContext context = TransportContextHolder.getTransportContext();
                 String url =context.getConnection().getUri().toString();
-                requestbuild.append("\n======================================== Outbound SOAP REQUEST =================================================================================")
+                requestBuilder.append("\n======================================== Outbound SOAP REQUEST =================================================================================")
                         .append("\nRequest Url:"+url)
                         .append("\nRequest Body: "+payload)
                         .append("\n===========================================================================================");
-                log.info(requestbuild.toString());
+                log.info(requestBuilder.toString());
             } catch (IOException |URISyntaxException e) {
                 throw new WebServiceClientException("Can not write the SOAP request into the out stream", e) {
                     private static final long serialVersionUID = -7118480620416458069L;

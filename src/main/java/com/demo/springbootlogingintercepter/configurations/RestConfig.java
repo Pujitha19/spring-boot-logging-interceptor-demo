@@ -1,6 +1,6 @@
-package com.demo.springbootlogingintercepter.util;
+package com.demo.springbootlogingintercepter.configurations;
 
-import com.demo.springbootlogingintercepter.configurations.RestExternalConfig;
+import com.demo.springbootlogingintercepter.util.RestExternalUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.BufferingClientHttpRequestFactory;
@@ -20,7 +20,7 @@ public class RestConfig {
  public RestTemplate restTemplate(){
  RestTemplate restTemplate=new RestTemplate(new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory()));
  List<ClientHttpRequestInterceptor> interceptors=restTemplate.getInterceptors();
- restTemplate.setInterceptors(Collections.singletonList(new RestExternalConfig()));
+ restTemplate.setInterceptors(Collections.singletonList(new RestExternalUtils()));
  restTemplate.setInterceptors(interceptors);
  return  restTemplate;
  }

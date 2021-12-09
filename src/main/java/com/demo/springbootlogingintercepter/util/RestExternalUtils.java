@@ -1,4 +1,4 @@
-package com.demo.springbootlogingintercepter.configurations;
+package com.demo.springbootlogingintercepter.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +14,7 @@ import java.nio.charset.Charset;
 
 
 @Component
-public class RestExternalConfig implements ClientHttpRequestInterceptor {
+public class RestExternalUtils implements ClientHttpRequestInterceptor {
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -32,7 +32,7 @@ public class RestExternalConfig implements ClientHttpRequestInterceptor {
         StringBuilder requestBuilder = new StringBuilder();
         requestBuilder
                 .append("\n===========================OUTBOUND REST REQUEST================================================")
-                .append("\nURI         : "+request.getURI())
+                .append("\nURI         : "+ request.getURI())
                 .append("\nMethod      : "+ request.getMethod())
                 .append("\nHeaders     : "+ request.getHeaders())
                 .append("\nRequest body: "+ new String(body, "UTF-8"))
@@ -44,13 +44,13 @@ public class RestExternalConfig implements ClientHttpRequestInterceptor {
     private void logResponse(ClientHttpResponse response) throws IOException
     {
 
-        StringBuilder request = new StringBuilder();
-        request
+        StringBuilder responseBuilder = new StringBuilder();
+        responseBuilder
                 .append("\n============================INBOUND REST RESPONSE==========================================")
                 .append("\nStatus code  : "+ response.getStatusCode())
                 .append("\nHeaders      : "+ response.getHeaders())
                 .append("\nResponse body: "+ StreamUtils.copyToString(response.getBody(), Charset.defaultCharset()))
                 .append("\n===========================================================================================");
-        log.info(request.toString());
+        log.info(responseBuilder.toString());
     }
 }

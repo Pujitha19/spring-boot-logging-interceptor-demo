@@ -1,4 +1,4 @@
-package com.demo.springbootlogingintercepter.configurations;
+package com.demo.springbootlogingintercepter.util;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
@@ -19,7 +19,7 @@ import java.util.Iterator;
 
 @Component
 @Slf4j
-public class InternalLoggingConfig implements Filter {
+public class InternalLoggingUtils implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -30,43 +30,43 @@ public class InternalLoggingConfig implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
 
         MyCustomHttpRequestWrapper httpServletRequest = new MyCustomHttpRequestWrapper((HttpServletRequest)servletRequest);
-        StringBuilder requestbuilder = new StringBuilder();
-        requestbuilder.append("\n======================================== Internal Flow Started =================================================================================")
+        StringBuilder requestBuilder = new StringBuilder();
+        requestBuilder.append("\n======================================== Internal Flow Started =================================================================================")
                         .append("\nRequest URI "+ httpServletRequest.getRequestURI())
                                 .append("\nRequest Method "+ httpServletRequest.getMethod())
-                                        .append("\nRequest RequestBody {}"+ new String(httpServletRequest.getByteArray()));
+                                        .append("\nRequest RequestBody "+ new String(httpServletRequest.getByteArray()));
 
 
         Enumeration<String> headerNames = httpServletRequest.getHeaderNames();
 
         if (headerNames != null) {
-            requestbuilder.append("\nRequest Headers:: {\n");
+            requestBuilder.append("\nRequest Headers:: {\n");
             while (headerNames.hasMoreElements()) {
                 String s=headerNames.nextElement();
-                requestbuilder.append(s+"  : "+httpServletRequest.getHeader(s)+"\n");
+                requestBuilder.append(s+"  : "+httpServletRequest.getHeader(s)+"\n");
             }
-            requestbuilder.append("\n}\n");
+            requestBuilder.append("\n}\n");
         }
-        log.info(requestbuilder.toString());
+        log.info(requestBuilder.toString());
 
 
         MyCustomHttpResponseWrapper httpservletResponse = new MyCustomHttpResponseWrapper((HttpServletResponse)servletResponse);
         filterChain.doFilter(httpServletRequest,httpservletResponse);
 
-        StringBuilder requestbuilder1= new StringBuilder();
-       requestbuilder1
-        .append("\nResponse Status {}"+ httpservletResponse.getStatus())
-                .append("\nResponse Body {}"+ new String(httpservletResponse.getBaos().toByteArray()));
+        StringBuilder responseBuilder= new StringBuilder();
+       responseBuilder
+        .append("\nResponse Status "+ httpservletResponse.getStatus())
+                .append("\nResponse Body "+ new String(httpservletResponse.getBaos().toByteArray()));
         Collection<String> headers=httpservletResponse.getHeaderNames();
         Iterator<String> iterator= headers.iterator();
-        requestbuilder1.append("\nResponse Headers:: {\n");
+        responseBuilder.append("\nResponse Headers:: {\n");
         while (iterator.hasNext()){
             String s=iterator.next();
-            requestbuilder1.append(s+"  : "+httpservletResponse.getHeader(s)+"\n");
+            responseBuilder.append(s+"  : "+httpservletResponse.getHeader(s)+"\n");
         }
-        requestbuilder1.append("=================================================== Internal Flow Ends ===========================================================================");
+        responseBuilder.append("=================================================== Internal Flow Ends ===========================================================================");
 
-        log.info(requestbuilder1.toString());
+        log.info(responseBuilder.toString());
 
     }
 
