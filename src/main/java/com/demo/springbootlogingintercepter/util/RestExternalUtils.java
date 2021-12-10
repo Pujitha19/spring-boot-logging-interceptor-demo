@@ -47,7 +47,7 @@ public class RestExternalUtils implements ClientHttpRequestInterceptor {
         StringBuilder responseBuilder = new StringBuilder();
         responseBuilder
                 .append("\n============================INBOUND REST RESPONSE==========================================")
-                .append("\nStatus code  : "+ response.getStatusCode())
+                .append("\nStatus code  : "+ response.getStatusCode().value())
                 .append("\nHeaders      : "+ response.getHeaders())
                 .append("\nResponse body: "+ StreamUtils.copyToString(response.getBody(), Charset.defaultCharset()))
                 .append("\n===========================================================================================");
