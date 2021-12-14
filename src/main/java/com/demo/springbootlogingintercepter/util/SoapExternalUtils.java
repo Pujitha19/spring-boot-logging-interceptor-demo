@@ -44,12 +44,8 @@ public class SoapExternalUtils implements ClientInterceptor {
 
                 log.info(responseBuilder.toString());
 
-            } catch (IOException |URISyntaxException e) {
-                throw new WebServiceClientException("Can not write the SOAP response into the out stream", e) {
-
-                    private static final long serialVersionUID = -7118480620416458069L;
-                };
-
+            } catch (Exception e) {
+                           log.error(e.getMessage());
 
             }
 
@@ -73,10 +69,8 @@ public class SoapExternalUtils implements ClientInterceptor {
                         .append("\nRequest Body: "+payload)
                         .append("\n===========================================================================================");
                 log.info(requestBuilder.toString());
-            } catch (IOException |URISyntaxException e) {
-                throw new WebServiceClientException("Can not write the SOAP request into the out stream", e) {
-                    private static final long serialVersionUID = -7118480620416458069L;
-                };
+            } catch (Exception e) {
+                 log.error(e.getMessage());
             }
 
             return true;
@@ -90,10 +84,8 @@ public class SoapExternalUtils implements ClientInterceptor {
                 messageContext.getResponse().writeTo(buffer);
                 String payload = buffer.toString(StandardCharsets.UTF_8.name());
 
-            } catch (IOException e) {
-                throw new WebServiceClientException("Can not write the SOAP fault into the out stream", e) {
-                    private static final long serialVersionUID = 3538336091916808141L;
-                };
+            } catch (Exception e) {
+                log.error(e.getMessage());
             }
             return true;
 

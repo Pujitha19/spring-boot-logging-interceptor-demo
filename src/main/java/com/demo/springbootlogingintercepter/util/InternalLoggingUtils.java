@@ -85,7 +85,7 @@ public class InternalLoggingUtils implements Filter {
             try{
                 byteArray = IOUtils.toByteArray(request.getInputStream());
             } catch (Exception e) {
-                throw new RuntimeException("Issue in reading Stream");
+                log.error(e.getMessage());
             }
         }
 
