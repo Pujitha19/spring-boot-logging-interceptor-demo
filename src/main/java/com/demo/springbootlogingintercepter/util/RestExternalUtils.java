@@ -19,37 +19,34 @@ public class RestExternalUtils implements ClientHttpRequestInterceptor {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Override
-    public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException
-    {
+    public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {
         logRequest(request, body);
-        ClientHttpResponse response = execution.execute(request, body);
-        logResponse(response);
-        return response;
+        ClientHttpResponse clientHttpResponse = execution.execute(request, body);
+        logResponse(clientHttpResponse);
+        return clientHttpResponse;
     }
 
-    private void logRequest(HttpRequest request, byte[] body) throws IOException
-    {
+    private void logRequest(HttpRequest request, byte[] body) throws IOException {
         StringBuilder requestBuilder = new StringBuilder();
         requestBuilder
                 .append("\n===========================OUTBOUND REST REQUEST================================================")
-                .append("\nURI         : "+ request.getURI())
-                .append("\nMethod      : "+ request.getMethod())
-                .append("\nHeaders     : "+ request.getHeaders())
-                .append("\nRequest body: "+ new String(body, "UTF-8"))
+                .append("\nURI         : " + request.getURI())
+                .append("\nMethod      : " + request.getMethod())
+                .append("\nHeaders     : " + request.getHeaders())
+                .append("\nRequest body: " + new String(body, "UTF-8"))
                 .append("\n===========================================================================================");
         log.info(requestBuilder.toString());
 
     }
 
-    private void logResponse(ClientHttpResponse response) throws IOException
-    {
+    private void logResponse(ClientHttpResponse response) throws IOException {
 
         StringBuilder responseBuilder = new StringBuilder();
         responseBuilder
                 .append("\n============================INBOUND REST RESPONSE==========================================")
-                .append("\nStatus code  : "+ response.getStatusCode().value())
-                .append("\nHeaders      : "+ response.getHeaders())
-                .append("\nResponse body: "+ StreamUtils.copyToString(response.getBody(), Charset.defaultCharset()))
+                .append("\nStatus code  : " + response.getStatusCode().value())
+                .append("\nHeaders      : " + response.getHeaders())
+                .append("\nResponse body: " + StreamUtils.copyToString(response.getBody(), Charset.defaultCharset()))
                 .append("\n===========================================================================================");
         log.info(responseBuilder.toString());
     }

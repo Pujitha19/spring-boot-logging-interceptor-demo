@@ -21,48 +21,44 @@ import java.util.Iterator;
 @Slf4j
 public class InternalLoggingUtils implements Filter {
 
-    @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-
-    }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
 
-        MyCustomHttpRequestWrapper httpServletRequest = new MyCustomHttpRequestWrapper((HttpServletRequest)servletRequest);
+        MyCustomHttpRequestWrapper myCustomHttpRequestWrapper = new MyCustomHttpRequestWrapper((HttpServletRequest) servletRequest);
         StringBuilder requestBuilder = new StringBuilder();
         requestBuilder.append("\n======================================== Internal Flow Started =================================================================================")
-                        .append("\nRequest URI "+ httpServletRequest.getRequestURI())
-                                .append("\nRequest Method "+ httpServletRequest.getMethod())
-                                        .append("\nRequest RequestBody "+ new String(httpServletRequest.getByteArray()));
+                .append("\nRequest URI " + myCustomHttpRequestWrapper.getRequestURI())
+                .append("\nRequest Method " + myCustomHttpRequestWrapper.getMethod())
+                .append("\nRequest RequestBody " + new String(myCustomHttpRequestWrapper.getByteArray()));
 
 
-        Enumeration<String> headerNames = httpServletRequest.getHeaderNames();
+        Enumeration<String> headerNames = myCustomHttpRequestWrapper.getHeaderNames();
 
         if (headerNames != null) {
-            requestBuilder.append("\nRequest Headers:: {\n");
+            requestBuilder.append("\nRequest Headers:: {");
             while (headerNames.hasMoreElements()) {
-                String s=headerNames.nextElement();
-                requestBuilder.append(s+"  : "+httpServletRequest.getHeader(s)+"\n");
+                String headerName = headerNames.nextElement();
+                requestBuilder.append(headerName + "  : " + myCustomHttpRequestWrapper.getHeader(headerName) + ",");
             }
             requestBuilder.append("\n}\n");
         }
         log.info(requestBuilder.toString());
 
 
-        MyCustomHttpResponseWrapper httpservletResponse = new MyCustomHttpResponseWrapper((HttpServletResponse)servletResponse);
-        filterChain.doFilter(httpServletRequest,httpservletResponse);
+        MyCustomHttpResponseWrapper myCustomHttpResponseWrapper = new MyCustomHttpResponseWrapper((HttpServletResponse) servletResponse);
+        filterChain.doFilter(myCustomHttpRequestWrapper, myCustomHttpResponseWrapper);
 
-        StringBuilder responseBuilder= new StringBuilder();
-       responseBuilder
-        .append("\nResponse Status "+ httpservletResponse.getStatus())
-                .append("\nResponse Body "+ new String(httpservletResponse.getBaos().toByteArray()));
-        Collection<String> headers=httpservletResponse.getHeaderNames();
-        Iterator<String> iterator= headers.iterator();
-        responseBuilder.append("\nResponse Headers:: {\n");
-        while (iterator.hasNext()){
-            String s=iterator.next();
-            responseBuilder.append(s+"  : "+httpservletResponse.getHeader(s)+"\n");
+        StringBuilder responseBuilder = new StringBuilder();
+        responseBuilder
+                .append("\nResponse Status " + myCustomHttpResponseWrapper.getStatus())
+                .append("\nResponse Body " + new String(myCustomHttpResponseWrapper.getByteArrayOutputStream().toByteArray()));
+        Collection<String> headers = myCustomHttpResponseWrapper.getHeaderNames();
+        Iterator<String> iterator = headers.iterator();
+        responseBuilder.append("\nResponse Headers:: {");
+        while (iterator.hasNext()) {
+            String headerName = iterator.next();
+            responseBuilder.append(headerName + "  : " + myCustomHttpResponseWrapper.getHeader(headerName) + ",");
         }
         responseBuilder.append("=================================================== Internal Flow Ends ===========================================================================");
 
@@ -70,10 +66,6 @@ public class InternalLoggingUtils implements Filter {
 
     }
 
-    @Override
-    public void destroy() {
-
-    }
 
     private class MyCustomHttpRequestWrapper extends HttpServletRequestWrapper {
 
@@ -82,7 +74,7 @@ public class InternalLoggingUtils implements Filter {
         public MyCustomHttpRequestWrapper(HttpServletRequest request) {
             super(request);
 
-            try{
+            try {
                 byteArray = IOUtils.toByteArray(request.getInputStream());
             } catch (Exception e) {
                 log.error(e.getMessage());
@@ -91,10 +83,7 @@ public class InternalLoggingUtils implements Filter {
 
         @Override
         public ServletInputStream getInputStream() throws IOException {
-            DelegatingServletInputStream delegatingServletInputStream;
             return new DelegatingServletInputStream(new ByteArrayInputStream(byteArray));
-
-
         }
 
         public byte[] getByteArray() {
@@ -103,11 +92,11 @@ public class InternalLoggingUtils implements Filter {
     }
 
     private class MyCustomHttpResponseWrapper extends HttpServletResponseWrapper {
-        private ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        private PrintStream printStream = new PrintStream(baos);
+        private ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        private PrintStream printStream = new PrintStream(byteArrayOutputStream);
 
-        public ByteArrayOutputStream getBaos() {
-            return baos;
+        public ByteArrayOutputStream getByteArrayOutputStream() {
+            return byteArrayOutputStream;
         }
 
         public MyCustomHttpResponseWrapper(HttpServletResponse servletResponse) {
@@ -117,12 +106,12 @@ public class InternalLoggingUtils implements Filter {
 
         @Override
         public ServletOutputStream getOutputStream() throws IOException {
-            return new DelegatingServletOutputStream( new TeeOutputStream(super.getOutputStream(), printStream));
+            return new DelegatingServletOutputStream(new TeeOutputStream(super.getOutputStream(), printStream));
         }
 
         @Override
         public PrintWriter getWriter() throws IOException {
-            return new PrintWriter( new TeeOutputStream(super.getOutputStream(), printStream));
+            return new PrintWriter(new TeeOutputStream(super.getOutputStream(), printStream));
         }
     }
 }
