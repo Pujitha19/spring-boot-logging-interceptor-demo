@@ -49,17 +49,18 @@ Response Body: {}<br>
 <h1>How to setup</h1>
 <ul>
        <li>
-1. First, we need to call and set the interceptor for external logging by calling its object.
+ First, we need to call and set the interceptor for external logging by calling its object.
               The externalClientInterceptor class has methods for external soap and rest loggers.</li>
        <li>
-2. For Soap client logger use following code.
+ For Soap client logger use following code.
               `soapCalculatorClient.setInterceptors(ExternalClientLoggerInterceptor.getSoapClientLogger());`</li>
        <li>
-3. For Rest Client logger use this code.It should be inside the code block where we create the bean for rest template.
+ For Rest Client logger use this code.It should be inside the code block where we create the bean for rest template.
               ` restTemplate.setInterceptors(ExternalClientLoggerInterceptor.getRestClientLogger());</li>
        <li>
-4. For internal logging we need to create a bean for restInternalLoggingUtil since rest is used for both soap and rest in
+ For internal logging we need to create a bean for restInternalLoggingUtil since rest is used for both soap and rest in
               internal logging.</li>
+       </ul>
   ` @Bean
    public InternalRestClientLoggerUtil getInternalRestClientLoggerUtil(){
    return new InternalRestClientLoggerUtil();
