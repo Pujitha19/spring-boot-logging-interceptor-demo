@@ -89,7 +89,11 @@ Response Body: {}<br>
        <li>
  Open the terminal and run the below command.
        </li>
-   ```mvn clean package```
+       <pre>
+       <code>
+   mvn clean package
+   </code>
+   </pre>
        <li>
               A path will be generated in the console as shown below.</li>
    ![img_1.png](img_1.png)
@@ -102,8 +106,11 @@ Response Body: {}<br>
        <li>
  run the command.
        </li>
-```mvn clean install```
-
+       <pre>
+       <code>
+mvn clean install
+</code>
+</pre>
 
 
 
