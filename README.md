@@ -1,6 +1,6 @@
 <h1>Spring boot logger</h1>
 <p>This application logs both request and response when hit the external server 
-with input params (with methods, eg. GET, POST, etc), request Url, query string,
+with input params (with methods, eg. GET, POST, PUT,DELETE), request Url, query string,
 also response of this action, both success and errors and Status code.It logs not only 
 incoming https request/response but also outgoing https requests/response in json format as shown below.<br>
 2021-11-15T06:57:16,676 INFO [RestClientLogger] -<br>
@@ -47,14 +47,19 @@ Response Body: {}<br>
 
 
 <h1>How to setup</h1>
+<ul>
+       <li>
 1. First, we need to call and set the interceptor for external logging by calling its object.
-The externalClientInterceptor class has methods for external soap and rest loggers. 
+              The externalClientInterceptor class has methods for external soap and rest loggers.</li>
+       <li>
 2. For Soap client logger use following code.
-`soapCalculatorClient.setInterceptors(ExternalClientLoggerInterceptor.getSoapClientLogger());`
+              `soapCalculatorClient.setInterceptors(ExternalClientLoggerInterceptor.getSoapClientLogger());`</li>
+       <li>
 3. For Rest Client logger use this code.It should be inside the code block where we create the bean for rest template.
- ` restTemplate.setInterceptors(ExternalClientLoggerInterceptor.getRestClientLogger());`
+              ` restTemplate.setInterceptors(ExternalClientLoggerInterceptor.getRestClientLogger());</li>
+       <li>
 4. For internal logging we need to create a bean for restInternalLoggingUtil since rest is used for both soap and rest in
-internal logging.
+              internal logging.</li>
   ` @Bean
    public InternalRestClientLoggerUtil getInternalRestClientLoggerUtil(){
    return new InternalRestClientLoggerUtil();
