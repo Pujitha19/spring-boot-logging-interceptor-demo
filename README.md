@@ -62,12 +62,14 @@ Response Body: {}<br>
  For internal logging we need to create a bean for restInternalLoggingUtil since rest is used for both soap and rest in
               internal logging.</li>
        </ul>
-   `    
+  <pre>
+  <code>
    @Bean
    public InternalRestClientLoggerUtil getInternalRestClientLoggerUtil(){
    return new InternalRestClientLoggerUtil();
    }
-   `
+   </code>
+   </pre>
 5. This completes setting the environment before we run the program.
 
 
