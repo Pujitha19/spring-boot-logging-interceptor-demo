@@ -61,27 +61,45 @@ Response Body: {}<br>
  For internal logging we need to create a bean for restInternalLoggingUtil since rest is used for both soap and rest in
               internal logging.</li>
        </ul>
-  ` @Bean
+   ```    
+   @Bean
    public InternalRestClientLoggerUtil getInternalRestClientLoggerUtil(){
    return new InternalRestClientLoggerUtil();
-   }`
+   }
+   ```
 5. This completes setting the environment before we run the program.
 
 
 
 
 <h1>How to run</h1>
-1. Download the spring-boot-logger project.
-2. Unzip the file into target folder.
-3. load the project into your local ide.
-4. Open the terminal and run the below command.
-   `mvn clean package`
-5. A path will be generated in the console as shown below.
+<ul>
+       <li>
+ Download the spring-boot-logger project.
+       </li>
+       <li>
+ Unzip the file into target folder.
+       </li>
+       <li>
+ load the project into your local ide.
+       </li>
+       <li>
+ Open the terminal and run the below command.
+       </li>
+   ```mvn clean package```
+       <li>
+              A path will be generated in the console as shown below.</li>
    ![img_1.png](img_1.png)
-6. Copy this path of jar file and return to original application.
-7. Import jar file into your classpath.
-8. run the command.
-`mvn clean install`
+       <li>
+ Copy this path of jar file and return to original application.
+       </li>
+       <li>
+ Import jar file into your classpath.
+       </li>
+       <li>
+ run the command.
+       </li>
+```mvn clean install```
 
 
 
