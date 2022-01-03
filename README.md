@@ -23,7 +23,8 @@ Response Body: {}<br>
 
 <h1>Dependencies</h1>
 <h2>Dependencies used in this application are</h2>
-
+<pre>
+<code>
 <dependency>
        <groupId>org.springframework.boot</groupId>
        <artifactId>spring-boot-starter-web-services</artifactId>
@@ -45,7 +46,8 @@ Response Body: {}<br>
             <version>${apache-commons-io-version}</version>
 </dependency>
 
-
+</code>
+</pre>
 
 <h1>How to setup</h1>
 <ul>
