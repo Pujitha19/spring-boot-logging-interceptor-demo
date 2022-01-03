@@ -1,4 +1,4 @@
-#Spring boot logger
+<h1>Spring boot logger</h1>
 <p>This application logs both request and response when hit the external server 
 with input params (with methods, eg. GET, POST, etc), request Url, query string,
 also response of this action, both success and errors and Status code.It logs not only 
@@ -21,7 +21,7 @@ Response Body: {}<br>
 
 
 
-##Dependencies
+<h1>Dependencies</h1>
 <p>Dependencies used in this application are</p>
 <dependency>
        <groupId>org.springframework.boot</groupId>
@@ -46,7 +46,7 @@ Response Body: {}<br>
 
 
 
-##How to setup
+<h1>How to setup</h1>
 1. First, we need to call and set the interceptor for external logging by calling its object.
 The externalClientInterceptor class has methods for external soap and rest loggers. 
 2. For Soap client logger use following code.
@@ -64,7 +64,7 @@ internal logging.
 
 
 
-##How to run
+<h1>How to run</h1>
 1. Download the spring-boot-logger project.
 2. Unzip the file into target folder.
 3. load the project into your local ide.
